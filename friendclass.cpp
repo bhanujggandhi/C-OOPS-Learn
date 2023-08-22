@@ -2,6 +2,10 @@
 
 using namespace std;
 
+/*
+A friend class in C++ is a class that is granted access to the private and protected members of another class. When a class is declared as a friend of another class, it can access the private and protected members of the friend class as if they were its own members. Friend classes are used to establish tight relationships between classes while maintaining encapsulation.
+*/
+
 class Base {
    private:
     int data;
@@ -28,6 +32,10 @@ class Bhai {
         cout << "Bhai ka d " << this->d << endl;
         return;
     }
+
+    void doSomething(const Base &b) {
+        cout << "Doing something, " << b.data << endl;
+    }
 };
 
 int main() {
@@ -36,6 +44,7 @@ int main() {
 
     Base ba;
     cout << ba.getData() << endl;
+    bh.doSomething(ba);
 
     return 0;
 }

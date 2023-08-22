@@ -38,6 +38,24 @@ class Bhai {
     }
 };
 
+// ====== Private constructor using friend classes ========
+
+class A {
+   private:
+    int data;
+    A(int d) : data(d){};
+
+    friend class B;
+};
+
+class B {
+   public:
+    B() {
+        A a1(29);
+        cout << a1.data << endl;
+    }
+};
+
 int main() {
     Bhai bh(20);
     bh.printD();
@@ -45,6 +63,13 @@ int main() {
     Base ba;
     cout << ba.getData() << endl;
     bh.doSomething(ba);
+
+    cout << "==================" << endl;
+
+    B bclass;
+
+    // Cannot directly access A's constructor as it is private but using friend function we can
+    // A aclass(20);
 
     return 0;
 }

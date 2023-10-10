@@ -68,3 +68,17 @@ int main() {
 
     return 0;
 }
+
+/*
+In this example:
+
+We define a PaymentStrategy interface with a pay method that concrete payment methods must implement.
+
+We create two concrete payment methods, CreditCardPayment and PayPalPayment, both of which inherit from the PaymentStrategy interface and implement the pay method.
+
+The ShoppingCart class represents the context that uses a specific payment strategy. It has a checkout method that delegates the payment to the selected strategy.
+
+In the main function, we create instances of concrete payment methods and then create two shopping carts with different payment methods. We demonstrate how to perform a checkout using each payment method.
+
+The Strategy Pattern allows you to add new payment methods without modifying the existing code in the ShoppingCart class, promoting flexibility and maintainability.
+*/

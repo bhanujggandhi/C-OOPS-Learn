@@ -38,14 +38,14 @@ class ConsoleLogger : public Logger {
 
 class FileLogger : public Logger {
    private:
-    const static int INFO = 2;
+    const static int WARNING = 2;
 
    public:
     FileLogger(Logger *nextLogger) : Logger(nextLogger) {
     }
 
     void logMessage(int level, string &message) {
-        if (level == INFO) {
+        if (level == WARNING) {
             cout << "File Logger: " << message << endl;
         } else {
             if (next != nullptr) {
@@ -57,14 +57,14 @@ class FileLogger : public Logger {
 
 class ErrorLogger : public Logger {
    private:
-    const static int INFO = 3;
+    const static int ERROR = 3;
 
    public:
     ErrorLogger(Logger *nextLogger) : Logger(nextLogger) {
     }
 
     void logMessage(int level, string &message) {
-        if (level == INFO) {
+        if (level == ERROR) {
             cout << "Error Logger: " << message << endl;
         } else {
             if (next != nullptr) {
@@ -75,12 +75,22 @@ class ErrorLogger : public Logger {
 };
 
 int main() {
-    Logger *consoleLogger = new ConsoleLogger(nullptr);
-    Logger *fileLogger = new FileLogger(consoleLogger);
-    Logger *errorLogger = new ErrorLogger(fileLogger);
+    Logger *errorLogger = new ErrorLogger(nullptr);
+    Logger *fileLogger = new FileLogger(errorLogger);
+    Logger *consoleLogger = new ConsoleLogger(fileLogger);
 
     string message = "This is an informational message";
-    errorLogger->logMessage(3, message);
+    consoleLogger->logMessage(1, message);
 
     return 0;
 }
+
+/*
+In this example:
+
+Logger is the abstract handler class with a reference to the next logger in the chain. It defines the logMessage method.
+
+ConsoleLogger, FileLogger, and ErrorLogger are concrete handlers that implement the logMessage method and decide whether to process the log message based on the log level.
+
+In the main function, we create a chain of loggers where each logger passes the log message to the next logger in the chain if it doesn't handle the message.
+*/

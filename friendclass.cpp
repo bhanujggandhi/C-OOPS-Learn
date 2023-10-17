@@ -43,7 +43,7 @@ class Bhai {
 class A {
    private:
     int data;
-    A(int d) : data(d){};
+    A() : data(100){};
 
     friend class B;
 };
@@ -51,8 +51,8 @@ class A {
 class B {
    public:
     B() {
-        A a1(29);
-        cout << a1.data << endl;
+        A a1;
+        cout << "A ka data: " << a1.data << endl;
     }
 };
 
@@ -69,7 +69,7 @@ int main() {
     B bclass;
 
     // Cannot directly access A's constructor as it is private but using friend function we can
-    // A aclass(20);
+    A aclass;
 
     return 0;
 }

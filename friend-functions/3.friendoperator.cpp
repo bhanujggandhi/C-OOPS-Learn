@@ -17,6 +17,7 @@ class Complex {
 
     friend Complex operator+(Complex &obj1, Complex &obj2);
     friend Complex operator-(Complex &obj1);
+    friend ostream &operator<<(ostream &dout, Complex &obj1);
 };
 
 // Overloading + operator as a friend function
@@ -35,6 +36,11 @@ Complex operator-(Complex &obj1) {
     return temp;
 }
 
+ostream &operator<<(ostream &dout, Complex &obj1) {
+    cout << "a: " << obj1.a << " + iota " << obj1.b << endl;
+    return dout;
+}
+
 int main() {
     Complex c1(10, 12), c2(1, 2);
 
@@ -44,5 +50,6 @@ int main() {
 
     ans.showData();
     c3.showData();
+    cout << c3 << endl;
     return 0;
 }

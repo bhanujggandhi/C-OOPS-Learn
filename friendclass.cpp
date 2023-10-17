@@ -69,7 +69,7 @@ int main() {
     B bclass;
 
     // Cannot directly access A's constructor as it is private but using friend function we can
-    A aclass;
+    // A aclass;
 
     return 0;
 }
